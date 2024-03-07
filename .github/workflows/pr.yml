@@ -1,0 +1,20 @@
+on: [pull_request]
+
+name: PyTest
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+        - uses: actions/checkout@v4
+        - name: Set up Python
+          uses: actions/setup-python@v5
+          with:
+            python-version: '3.x'
+        - name: Install dependencies
+          run: |
+            python3 -m pip install --upgrade pip
+        - name: Test with pytest
+          run: |
+            pip3 install pytest pytest-cov
+            pytest tests.py --doctest-modules --junitxml=junit/test-results.xml --cov=com --cov-report=xml --cov-report=html
