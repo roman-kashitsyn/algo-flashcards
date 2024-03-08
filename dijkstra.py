@@ -8,15 +8,15 @@ def dijkstra(g, s):
     heappush(pq, (0, s))
 
     while pq:
-        w, v = heappop(pq)
-        if w > d[v]:
+        w, u = heappop(pq)
+        if w > d[u]:
             continue
-        for n, w in g[v]:
-            dist = d[v] + w
-            if dist < d[n]:
-                d[n] = dist
-                p[n] = v
-                heappush(pq, (dist, n))
+        for v, w in g[u]:
+            dist = d[u] + w
+            if dist < d[v]:
+                d[v] = dist
+                p[v] = u
+                heappush(pq, (dist, v))
 
     return (p, d)
 
